@@ -10,4 +10,7 @@ enum SMELL {
 }
 
 public class CodeSmell {
+    public SMELL type;
+    public int line;
+    public int colum;
 }
