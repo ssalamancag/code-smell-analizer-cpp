@@ -1,0 +1,60 @@
+#include <bits/stdc++.h>
+using namespace std;
+class Geeks
+{
+    // Access specifier
+    public:
+
+    // Data Members
+    string geekname;
+
+    // Member Functions()
+    void printname()
+    {
+       cout << "Geekname is: " << geekname;
+       int a = 5 + 10;
+       if(a>1){
+            cout<<"es mayor";
+       }
+       if(a>1){
+                   cout<<"es mayor";
+       }
+       cout<<"es mayor";
+       cout<<"es mayor"; cout<<"es mayor";
+       cout<<"es mayor";
+       cout<<"es mayor";cout<<"es mayor";cout<<"es mayor";
+       cout<<"es mayor";
+       cout<<"es mayor";
+       cout<<"es mayor";
+       cout<<"es mayor";
+       cout<<"es mayor";
+       cout<<"es mayor";
+       cout<<"es mayor";
+       cout<<"es mayor";cout<<"es mayor";
+       cout<<"es mayor";
+       cout<<"es mayor";
+       cout<<"es mayor";
+       cout<<"es mayor";
+       cout<<"es mayor";
+       cout<<"es mayor";
+       cout<<"es mayor";
+       cout<<"es mayor";
+       cout<<"es mayor";
+       cout<<"es mayor";
+       cout<<"es mayor";
+       cout<<"es mayor";
+       cout<<"es mayor";
+       cout<<"es mayor";
+       cout<<"es mayor";
+       cout<<"es mayor";
+       cout<<"es mayor";
+       cout<<"es mayor";
+       cout<<"es mayor";
+       cout<<"es mayor";
+
+
+
+
+    }
+};
+

@@ -9,6 +9,12 @@ public class VisitorCPP <T> extends  CPPBaseVisitor{
         detector = new CodeSmellDetector();
     }
 
+    @Override public T visitFunctionbody(CPPParser.FunctionbodyContext ctx) {
+        String[] arr = ctx.getText().split(";");
 
-
+        if(arr.length > 30){
+            detector.AddCodeSmell(SMELL.LongMethod,ctx.getStart().getLine(), ctx.getStart().getCharPositionInLine());
+        }
+        return (T) super.visitChildren(ctx);
+    }
 }

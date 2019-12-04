@@ -21,7 +21,9 @@ public class CodeSmellDetector {
 
     //metodo para imprimir
     public void print (){
-        System.out.println(codeSmells);
+        for( CodeSmell c: codeSmells){
+            System.out.println("Type: "+ c.type+ " in position,  line: "+c.colum+" column: "+ c.colum );
+        }
     }
 
 }
