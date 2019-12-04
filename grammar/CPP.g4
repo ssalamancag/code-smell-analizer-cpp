@@ -25,7 +25,7 @@ grammar CPP;
 /*Basic concepts*/
 
 
-translationunit
+translatinunit
    : declarationseq? EOF
    ;
 /*Expressions*/
