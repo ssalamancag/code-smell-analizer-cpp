@@ -15,14 +15,13 @@ public class CodeSmellDetector {
         smell.type = type;
         smell.line = line;
         smell.colum = column;
-
         codeSmells.add(smell);
     }
 
     //metodo para imprimir
     public void print (){
         for( CodeSmell c: codeSmells){
-            System.out.println("Type: "+ c.type+ " in position,  line: "+c.colum+" column: "+ c.colum );
+            System.out.println("Type: "+ c.type+ " in position,  line: "+c.line+" column: "+ c.colum );
         }
     }
 
