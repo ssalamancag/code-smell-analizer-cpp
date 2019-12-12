@@ -3,7 +3,7 @@ enum SMELL {
     ManyParameters, //mauro
     LongShortIdentifiers, // jhonatan
     BooleanExpressions,
-    CyclomaticComplexy,
+    CyclomaticComplexy, //sebastian
     FeatureEnvy,
     RefusedBequest,
     LazyClass

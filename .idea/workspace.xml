@@ -4,11 +4,8 @@
     <list default="true" id="b52e1bf1-67e4-4952-8b9f-e35d27222080" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/input/entrada.txt" beforeDir="false" afterPath="$PROJECT_DIR$/input/entrada.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/code-smell-analizer-cpp/CodeSmellDetector.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/code-smell-analizer-cpp/CodeSmellDetector.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/code-smell-analizer-cpp/SMELL.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/code-smell-analizer-cpp/SMELL.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/code-smell-analizer-cpp/VisitorCPP.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/code-smell-analizer-cpp/VisitorCPP.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/CodeSmell.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/CodeSmell.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/CodeSmellDetector.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/CodeSmellDetector.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/VisitorCPP.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/VisitorCPP.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -78,7 +75,9 @@
       <updated>1575321860593</updated>
       <workItem from="1575394465216" duration="12836000" />
       <workItem from="1575562610053" duration="7563000" />
-      <workItem from="1575665186027" duration="1874000" />
+      <workItem from="1575665186027" duration="2646000" />
+      <workItem from="1575725502663" duration="610000" />
+      <workItem from="1576174348436" duration="6457000" />
     </task>
     <servers />
   </component>
