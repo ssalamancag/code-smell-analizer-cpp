@@ -5,6 +5,7 @@ public class VisitorCPP <T> extends  CPPBaseVisitor{
 
     int sizeMethod = 30; ///numero maximo de instrucciones que puede tener un metodo para no ser considerado un code Smell
     int maximumNesting = 2; ///numero maximo de condicionales anidados permitidos antes de considerarse un code Smell
+    int maxParams = 4; //maximo numero de parametros antes de ser code smell
 
     //nuestro objeto detector
     public CodeSmellDetector detector;
@@ -30,7 +31,6 @@ public class VisitorCPP <T> extends  CPPBaseVisitor{
         }
         return (T) super.visitChildren(ctx);
     }
-
 
 
     @Override public T visitSelectionstatement(CPPParser.SelectionstatementContext ctx) {
@@ -78,4 +78,25 @@ public class VisitorCPP <T> extends  CPPBaseVisitor{
         }
         return (T) visitChildren(ctx); }
 
+
+    public int parameterCounter;
+    public boolean parameterListSmelled;
+
+    @Override public T visitParameterdeclarationlist(CPPParser.ParameterdeclarationlistContext ctx){
+        //se cuenta cada uno de los parametros, si sobrepasa el maximo se genera un code smell
+        parameterCounter++;
+        if(parameterCounter > maxParams && !parameterListSmelled ){
+            detector.AddCodeSmell(SMELL.ManyParameters, ctx.getStart().getLine(), ctx.getStart().getCharPositionInLine());
+            parameterListSmelled = true;
+        }
+        return (T) visitChildren(ctx);
+    }
+
+    @Override public T visitParameterdeclarationclause(CPPParser.ParameterdeclarationclauseContext ctx){
+        //se entra a una nueva lista de parametros
+        parameterCounter = 0;
+        parameterListSmelled = false;
+        return (T) visitChildren(ctx);
+    }
 }
+
