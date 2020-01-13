@@ -4,8 +4,16 @@
     <list default="true" id="b52e1bf1-67e4-4952-8b9f-e35d27222080" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/input/entrada.txt" beforeDir="false" afterPath="$PROJECT_DIR$/input/entrada.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/code-smell-analizer-cpp/CPP.interp" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/code-smell-analizer-cpp/CPP.interp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/code-smell-analizer-cpp/CPPBaseListener.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/code-smell-analizer-cpp/CPPBaseListener.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/code-smell-analizer-cpp/CPPBaseVisitor.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/code-smell-analizer-cpp/CPPBaseVisitor.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/code-smell-analizer-cpp/CPPLexer.interp" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/code-smell-analizer-cpp/CPPLexer.interp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/code-smell-analizer-cpp/CPPListener.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/code-smell-analizer-cpp/CPPListener.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/code-smell-analizer-cpp/CPPParser.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/code-smell-analizer-cpp/CPPParser.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/code-smell-analizer-cpp/CPPVisitor.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/code-smell-analizer-cpp/CPPVisitor.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/code-smell-analizer-cpp/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/code-smell-analizer-cpp/Main.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/code-smell-analizer-cpp/VisitorCPP.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/code-smell-analizer-cpp/VisitorCPP.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/CodeSmell.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/CodeSmell.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/VisitorCPP.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/VisitorCPP.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />

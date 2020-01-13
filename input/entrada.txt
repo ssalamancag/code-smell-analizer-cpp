@@ -1,5 +1,6 @@
 #include <bits/stdc++.h>
 using namespace std;
+
 //no code smell
 class dog {
     public:
@@ -50,3 +51,13 @@ class cat {
     return 1;
     }
 };
+
+//codeSmell
+int function(int a, char b, int c, int d, int e, int f, int g){
+	return(a+b+c+d+e+f+g);
+}
+
+//nocodeSmell
+int main(int argc, char *argv[]){ 
+}
+
