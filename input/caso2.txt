@@ -1,0 +1,14 @@
+// TooComplicatedExpressions
+// LongShortIdentifiers
+#include <iostream>
+using namespace std;
+char myVarlkljkssakljakljasldlkjkljklj = 'A';
+int num3=20, num4=100;
+int main()
+{
+   int num1=20, num2=100;
+   bool x,y,z,c,d = true;
+   d = x==z;
+   z = (x && y) || c;
+   num3 = ((num1+num2)-(num4*num2))/num1;
+}

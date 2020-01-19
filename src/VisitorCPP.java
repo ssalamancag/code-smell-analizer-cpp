@@ -1,10 +1,19 @@
 import org.antlr.v4.runtime.tree.AbstractParseTreeVisitor;
 
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+
 public class VisitorCPP <T> extends  CPPBaseVisitor{
+
     //////PARAMETROS
 
     int sizeMethod = 30; ///numero maximo de instrucciones que puede tener un metodo para no ser considerado un code Smell
     int maximumNesting = 2; ///numero maximo de condicionales anidados permitidos antes de considerarse un code Smell
+    int maxLenghtIdentifiers = 16; ///longitud maxima de los identificadores
+    int minLenghtIdentifiers = 3; ///longitud minima de los identificadores
+    int maxNumberOperators = 3;  ///maximo numero de operadores en una expresion
 
     //nuestro objeto detector
     public CodeSmellDetector detector;
@@ -76,6 +85,30 @@ public class VisitorCPP <T> extends  CPPBaseVisitor{
                 }
             }
         }
+        return (T) visitChildren(ctx); }
+
+    @Override public T visitDeclaratorid(CPPParser.DeclaratoridContext ctx) {
+        String identifier = ctx.idexpression().unqualifiedid().Identifier().getText();
+        if (identifier.length()<minLenghtIdentifiers || identifier.length()>maxLenghtIdentifiers){
+            detector.AddCodeSmell(SMELL.LongShortIdentifiers, ctx.getStart().getLine(), ctx.getStart().getCharPositionInLine());
+        }
+        return (T) visitChildren(ctx); }
+
+    @Override public T visitExpression(CPPParser.ExpressionContext ctx) {
+        String expression = ctx.getText();
+        int numberOperators = 0;
+        Set<String> operators = new HashSet<String>();
+        List<String> operatorsList = Arrays.asList("+", "-", "*", "/", "%", "^", "&&", "||", "!", "not", "and", "or", "~");
+        operators.addAll(operatorsList);
+        for (String operator : operators) {
+            if (expression.contains(operator)) {
+                numberOperators++;
+            }
+        }
+        if (numberOperators>maxNumberOperators){
+            detector.AddCodeSmell(SMELL.TooComplicatedExpression, ctx.getStart().getLine(), ctx.getStart().getCharPositionInLine());
+        }
+
         return (T) visitChildren(ctx); }
 
 }
