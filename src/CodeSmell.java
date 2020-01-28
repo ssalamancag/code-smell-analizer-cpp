@@ -7,6 +7,7 @@ enum SMELL {
     FeatureEnvy,
     RefusedBequest,
     LazyClass,
+    TooComplicatedExpression,
     EmptyBlock
 }
 
