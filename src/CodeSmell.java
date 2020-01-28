@@ -6,7 +6,8 @@ enum SMELL {
     CyclomaticComplexy, //sebastian
     FeatureEnvy,
     RefusedBequest,
-    LazyClass
+    LazyClass,
+    EmptyBlock
 }
 
 public class CodeSmell {
