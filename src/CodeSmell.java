@@ -7,7 +7,8 @@ enum SMELL {
     FeatureEnvy,
     RefusedBequest,
     LazyClass,
-    TooComplicatedExpression
+    TooComplicatedExpression,
+    EmptyBlock
 }
 
 public class CodeSmell {

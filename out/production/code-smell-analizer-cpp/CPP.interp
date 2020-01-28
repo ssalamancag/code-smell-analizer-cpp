@@ -305,7 +305,7 @@ BlockComment
 LineComment
 
 rule names:
-translationunit
+translatinunit
 primaryexpression
 idexpression
 unqualifiedid

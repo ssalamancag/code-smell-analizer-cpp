@@ -21,7 +21,7 @@ public class Main {
         CPPParser parser = new CPPParser(tokens);
 
         // Iniciar el analisis sintáctico en la regla inicial
-        ParseTree tree = parser.translationunit();
+        ParseTree tree = parser.translatinunit();
 
         //Se crea nuestro objeto de tipo visitor
         VisitorCPP<Object> loader = new VisitorCPP<>();

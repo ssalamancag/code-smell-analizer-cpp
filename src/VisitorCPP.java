@@ -14,6 +14,7 @@ public class VisitorCPP <T> extends  CPPBaseVisitor{
     int maxLenghtIdentifiers = 16; ///longitud maxima de los identificadores
     int minLenghtIdentifiers = 3; ///longitud minima de los identificadores
     int maxNumberOperators = 3;  ///maximo numero de operadores en una expresion
+    int maxParams = 4; //maximo numero de parametros antes de ser code smell
 
     //nuestro objeto detector
     public CodeSmellDetector detector;
@@ -41,7 +42,6 @@ public class VisitorCPP <T> extends  CPPBaseVisitor{
     }
 
 
-
     @Override public T visitSelectionstatement(CPPParser.SelectionstatementContext ctx) {
         int nesting = nestingCount(ctx.statement().get(0).getText());
         if (nesting > maximumNesting){
@@ -52,31 +52,35 @@ public class VisitorCPP <T> extends  CPPBaseVisitor{
 
 
     @Override public T visitClassspecifier(CPPParser.ClassspecifierContext ctx) {
-        int childs = ctx.memberspecification().getChildCount();
-        boolean isPublic = true;
-
-        if(childs == 1 ){
-            //caso en el que solo existen metodos dentro de la clase
-            if(ctx.memberspecification().getChild(0).getClass().getName().equals("CPPParser$MemberdeclarationContext")){
-                detector.AddCodeSmell(SMELL.LazyClass, ctx.getStart().getLine(), ctx.getStart().getCharPositionInLine() );
-            }
+        if(ctx.getText().equals(ctx.classhead().getText()+"{}")){
+            detector.AddCodeSmell(SMELL.EmptyBlock, ctx.getStart().getLine(), ctx.getStart().getCharPositionInLine() );
         }else{
-            //se verifica si tiene el modificador de acceso "private"
-            for (int i = 0; i  < childs; i++){
-                if(ctx.memberspecification().getChild(i).getClass().getName().equals("CPPParser$AccessspecifierContext")){
-                    if(ctx.memberspecification().getChild(i).getText().equals("private")){
-                        isPublic = false;
-                    }
+            int childs = ctx.memberspecification().getChildCount();
+            boolean isPublic = true;
+
+            if(childs == 1 ){
+                //caso en el que solo existen metodos dentro de la clase
+                if(ctx.memberspecification().getChild(0).getClass().getName().equals("CPPParser$MemberdeclarationContext")){
+                    detector.AddCodeSmell(SMELL.LazyClass, ctx.getStart().getLine(), ctx.getStart().getCharPositionInLine() );
                 }
-                //se verifica que no tenga modificador a ""publico""
-                if(ctx.memberspecification().getChild(i).getClass().getName().equals("CPPParser$MemberspecificationContext") && !isPublic){
-                    for(int k = 0; k < ctx.memberspecification().getChild(i).getChildCount(); k++){
-                        if(ctx.memberspecification().getChild(i).getChild(k).getClass().getName().equals("CPPParser$MemberspecificationContext")){
-                            CPPParser.MemberspecificationContext child = (CPPParser.MemberspecificationContext) ctx.memberspecification().getChild(i).getChild(k);
-                            for (int j = 0; j < child.getChildCount(); j++){
-                                if(child.getChild(j).getClass().getName().equals("CPPParser$MemberspecificationContext")){
-                                    if(!child.getChild(j).getText().contains("public:")){
-                                        detector.AddCodeSmell(SMELL.LazyClass, ctx.getStart().getLine(), ctx.getStart().getCharPositionInLine() );
+            }else{
+                //se verifica si tiene el modificador de acceso "private"
+                for (int i = 0; i  < childs; i++){
+                    if(ctx.memberspecification().getChild(i).getClass().getName().equals("CPPParser$AccessspecifierContext")){
+                        if(ctx.memberspecification().getChild(i).getText().equals("private")){
+                            isPublic = false;
+                        }
+                    }
+                    //se verifica que no tenga modificador a ""publico""
+                    if(ctx.memberspecification().getChild(i).getClass().getName().equals("CPPParser$MemberspecificationContext") && !isPublic){
+                        for(int k = 0; k < ctx.memberspecification().getChild(i).getChildCount(); k++){
+                            if(ctx.memberspecification().getChild(i).getChild(k).getClass().getName().equals("CPPParser$MemberspecificationContext")){
+                                CPPParser.MemberspecificationContext child = (CPPParser.MemberspecificationContext) ctx.memberspecification().getChild(i).getChild(k);
+                                for (int j = 0; j < child.getChildCount(); j++){
+                                    if(child.getChild(j).getClass().getName().equals("CPPParser$MemberspecificationContext")){
+                                        if(!child.getChild(j).getText().contains("public:")){
+                                            detector.AddCodeSmell(SMELL.LazyClass, ctx.getStart().getLine(), ctx.getStart().getCharPositionInLine() );
+                                        }
                                     }
                                 }
                             }
@@ -85,6 +89,7 @@ public class VisitorCPP <T> extends  CPPBaseVisitor{
                 }
             }
         }
+
         return (T) visitChildren(ctx); }
 
     @Override public T visitDeclaratorid(CPPParser.DeclaratoridContext ctx) {
@@ -111,4 +116,38 @@ public class VisitorCPP <T> extends  CPPBaseVisitor{
 
         return (T) visitChildren(ctx); }
 
+    public int parameterCounter;
+    public boolean parameterListSmelled;
+
+    @Override public T visitParameterdeclarationlist(CPPParser.ParameterdeclarationlistContext ctx){
+        //se cuenta cada uno de los parametros, si sobrepasa el maximo se genera un code smell
+        parameterCounter++;
+        if(parameterCounter > maxParams && !parameterListSmelled ){
+            detector.AddCodeSmell(SMELL.ManyParameters, ctx.getStart().getLine(), ctx.getStart().getCharPositionInLine());
+            parameterListSmelled = true;
+        }
+        return (T) visitChildren(ctx);
+    }
+
+    @Override public T visitParameterdeclarationclause(CPPParser.ParameterdeclarationclauseContext ctx){
+        //se entra a una nueva lista de parametros
+        parameterCounter = 0;
+        parameterListSmelled = false;
+        return (T) visitChildren(ctx);
+    }
+
+    @Override public T visitBracedinitlist(CPPParser.BracedinitlistContext ctx){
+        if(ctx.getText().equals("{}")){
+            detector.AddCodeSmell(SMELL.EmptyBlock, ctx.getStart().getLine(), ctx.getStart().getCharPositionInLine());
+        }
+        return (T) visitChildren(ctx);
+    }
+
+    @Override public T visitCompoundstatement(CPPParser.CompoundstatementContext ctx){
+        if(ctx.getText().equals("{}")){
+            detector.AddCodeSmell(SMELL.EmptyBlock, ctx.getStart().getLine(), ctx.getStart().getCharPositionInLine());
+        }
+        return (T) visitChildren(ctx);
+    }
 }
+
