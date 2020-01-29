@@ -1,7 +1,9 @@
 enum SMELL {
     LongMethod, //sebastian
+    ShortMethod,
     ManyParameters, //mauro
-    LongShortIdentifiers, // jhonatan
+    LongIdentifiers, // jhonatan
+    ShortIdentifiers,
     BooleanExpressions,
     CyclomaticComplexy, //sebastian
     FeatureEnvy,
