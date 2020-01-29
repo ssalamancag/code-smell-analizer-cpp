@@ -9,10 +9,11 @@ public class VisitorCPP <T> extends  CPPBaseVisitor{
 
     //////PARAMETROS
 
-    int sizeMethod = 30; ///numero maximo de instrucciones que puede tener un metodo para no ser considerado un code Smell
+    int maxMethod = 30; ///numero maximo de instrucciones que puede tener un metodo para no ser considerado un code Smell
+    int minMethod = 3; ///numero minimo de instrucciones que puede tener un metodo para no ser considerado un code Smell
     int maximumNesting = 2; ///numero maximo de condicionales anidados permitidos antes de considerarse un code Smell
     int maxLenghtIdentifiers = 16; ///longitud maxima de los identificadores
-    int minLenghtIdentifiers = 3; ///longitud minima de los identificadores
+    int minLenghtIdentifiers = 2; ///longitud minima de los identificadores
     int maxNumberOperators = 3;  ///maximo numero de operadores en una expresion
     int maxParams = 4; //maximo numero de parametros antes de ser code smell
 
@@ -34,9 +35,10 @@ public class VisitorCPP <T> extends  CPPBaseVisitor{
 
     @Override public T visitFunctionbody(CPPParser.FunctionbodyContext ctx) {
         String[] arr = ctx.getText().split(";");
-
-        if(arr.length > sizeMethod){
+        if(arr.length > maxMethod){
             detector.AddCodeSmell(SMELL.LongMethod,ctx.getStart().getLine(), ctx.getStart().getCharPositionInLine());
+        }else if((arr.length < minMethod) && (arr.length != 1)){
+            detector.AddCodeSmell(SMELL.ShortMethod,ctx.getStart().getLine(), ctx.getStart().getCharPositionInLine());
         }
         return (T) super.visitChildren(ctx);
     }
@@ -94,9 +96,12 @@ public class VisitorCPP <T> extends  CPPBaseVisitor{
 
     @Override public T visitDeclaratorid(CPPParser.DeclaratoridContext ctx) {
         String identifier = ctx.idexpression().unqualifiedid().Identifier().getText();
-        if (identifier.length()<minLenghtIdentifiers || identifier.length()>maxLenghtIdentifiers){
-            detector.AddCodeSmell(SMELL.LongShortIdentifiers, ctx.getStart().getLine(), ctx.getStart().getCharPositionInLine());
+        if (identifier.length()<minLenghtIdentifiers ){
+            detector.AddCodeSmell(SMELL.ShortIdentifiers, ctx.getStart().getLine(), ctx.getStart().getCharPositionInLine());
+        }else if(identifier.length()>maxLenghtIdentifiers){
+            detector.AddCodeSmell(SMELL.LongIdentifiers, ctx.getStart().getLine(), ctx.getStart().getCharPositionInLine());
         }
+
         return (T) visitChildren(ctx); }
 
     @Override public T visitExpression(CPPParser.ExpressionContext ctx) {
