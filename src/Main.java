@@ -28,10 +28,11 @@ public class Main {
 
         //se recorre el arbol
         loader.visit(tree);
+        loader.nonInstancedClasses();
+        loader.nonExecutedFunctions();
 
         //Se llama al metodo que imprimira el arrray de smells
         loader.detector.print();
-
 
     }
 }
