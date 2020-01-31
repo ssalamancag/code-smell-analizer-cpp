@@ -1,16 +1,16 @@
 enum SMELL {
-    LongMethod, //sebastian
+    LongMethod,
     ShortMethod,
-    ManyParameters, //mauro
-    LongIdentifiers, // jhonatan
+    ManyParameters,
+    LongIdentifiers,
     ShortIdentifiers,
-    BooleanExpressions,
-    CyclomaticComplexy, //sebastian
-    FeatureEnvy,
-    RefusedBequest,
+    CyclomaticComplexy,
     LazyClass,
     TooComplicatedExpression,
-    EmptyBlock
+    EmptyBlock,
+    NonInstancedClass,
+    NonExecutedFunction,
+    MultipleMains
 }
 
 public class CodeSmell {
@@ -18,3 +18,4 @@ public class CodeSmell {
     public int line;
     public int colum;
 }
+
