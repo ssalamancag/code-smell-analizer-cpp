@@ -49,7 +49,7 @@
                   <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
                 </constraints>
                 <properties>
-                  <text value="&lt;html&gt;1) Carga tu codigo de C++ como un archivo .txt &lt;br&gt; 2) Escoge los parametros bajo los que quieres que se evalue tu codigo o deja los valores por defecto &lt;br&gt; 3) Haz click en DETECTAR OLORES DE CODIGO &lt;/html&gt;"/>
+                  <text value="&lt;html&gt;1) Carga tu codigo de C++ como un archivo .cpp o .txt &lt;br&gt; 2) Escoge los parametros bajo los que quieres que se evalue tu codigo o deja los valores por defecto &lt;br&gt; 3) Haz click en DETECTAR OLORES DE CODIGO &lt;/html&gt;"/>
                 </properties>
               </component>
             </children>
@@ -441,7 +441,7 @@
                           </grid>
                         </constraints>
                         <properties>
-                          <text value="16"/>
+                          <text value="8"/>
                         </properties>
                       </component>
                     </children>
@@ -473,7 +473,7 @@
                           </grid>
                         </constraints>
                         <properties>
-                          <text value="16"/>
+                          <text value="3"/>
                         </properties>
                       </component>
                     </children>
@@ -505,7 +505,7 @@
                           </grid>
                         </constraints>
                         <properties>
-                          <text value="16"/>
+                          <text value="5"/>
                         </properties>
                       </component>
                     </children>

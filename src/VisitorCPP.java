@@ -153,7 +153,7 @@ public class VisitorCPP <T> extends  CPPBaseVisitor {
         if(!expression.contains("<<") || !expression.contains(">>")){
             String[] exprarr = expression.split("&&|<|>|==|!|\\|\\|");
             if (exprarr.length > maxOps) {
-                detector.AddCodeSmell(SMELL.TooComplicatedExpression, ctx.getStart().getLine(), ctx.getStart().getCharPositionInLine());
+                detector.AddCodeSmell(SMELL.ComplicatedExpression, ctx.getStart().getLine(), ctx.getStart().getCharPositionInLine());
             }
         }
         return (T) visitChildren(ctx);

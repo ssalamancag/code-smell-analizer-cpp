@@ -6,7 +6,7 @@ enum SMELL {
     ShortIdentifiers,
     CyclomaticComplexy,
     LazyClass,
-    TooComplicatedExpression,
+    ComplicatedExpression,
     EmptyBlock,
     NonInstancedClass,
     NonExecutedFunction,

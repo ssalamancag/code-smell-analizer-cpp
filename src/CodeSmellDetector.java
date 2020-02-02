@@ -19,10 +19,12 @@ public class CodeSmellDetector {
     }
 
     //metodo para imprimir
-    public void print (){
+    public String print (){
+        String smells = "";
         for( CodeSmell c: codeSmells){
-            System.out.println("Type: "+ c.type+ " in position,  line: "+c.line+" column: "+ c.colum );
+            smells += "Type: "+ c.type+   "\t" + " in position,  line: "+c.line + "\n";
         }
+        return smells;
     }
 
 }

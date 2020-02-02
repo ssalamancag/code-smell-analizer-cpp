@@ -19,6 +19,13 @@ public class MainGUI {
     private JTextField jTextMaxCyc;
     private JTextField jTextMaxPar;
 
+    public void createMainGUI(){
+        JFrame frame1 = new JFrame("MainGUI");
+        frame1.setContentPane(new MainGUI().PanelMain);
+        frame1.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame1.pack();
+        frame1.setVisible(true);
+    }
 
     public MainGUI() {
         DETECTAROLORESDECODIGOButton.addActionListener(new ActionListener() {
@@ -37,7 +44,6 @@ public class MainGUI {
                     GUIAnalize analizer = new GUIAnalize();
                     analizer.analizeCode(route, maxMethod, minMethod, maxNesting, maxId, minId, maxParams, maxOps);
                 }catch(Exception exp){
-                    System.out.print("GONORREA PONGA NUMEROS");
                 }
             }
         });

@@ -1,12 +1,15 @@
 import org.antlr.v4.runtime.*;
 import org.antlr.v4.runtime.tree.*;
 
-import java.io.IOException;
+import java.io.*;
 
 public class GUIAnalize {
 
     public void analizeCode(String file, int maxMethod, int minMethod, int maxNesting, int maxId, int minId, int maxParams, int maxOps) throws IOException {
         CPPLexer lexer;
+        String showCode;
+
+        showCode = addLineNumber(file);
 
         //Puede leer a partir del archivo imput o por consola
         lexer = new CPPLexer(CharStreams.fromFileName(file));
@@ -28,8 +31,28 @@ public class GUIAnalize {
         loader.nonInstancedClasses();
         loader.nonExecutedFunctions();
 
+        ResultGUI resultado = new ResultGUI(showCode, loader.detector.print());
+        resultado.createResultGUI(showCode, loader.detector.print());
         //Se llama al metodo que imprimira el arrray de smells
-        loader.detector.print();
+
         //Nuestro objeto analizador lexico
+    }
+
+    public String addLineNumber(String file){
+        String codeFormatted = "";
+        String readLine = "";
+        Integer i = 0;
+        try (BufferedReader bufferedReader = new BufferedReader(new FileReader(file));
+        ) {
+            while ((readLine = bufferedReader.readLine()) != null) {
+                String line = Integer.toString(i) + ") -> " + readLine;
+                codeFormatted += line + "\n";
+                i++;
+            }
+        } catch (IOException e) {
+            System.out.println("Error.");
+            e.printStackTrace();
+        }
+        return codeFormatted;
     }
 }
