@@ -4,16 +4,14 @@ import CodeBlocks.Funcion;
 import java.util.*;
 
 public class VisitorCPP <T> extends  CPPBaseVisitor {
-
     //////PARAMETROS
-
-    int maxMethod = 30; ///numero maximo de instrucciones que puede tener un metodo para no ser considerado un code Smell
-    int minMethod = 3; ///numero minimo de instrucciones que puede tener un metodo para no ser considerado un code Smell
-    int maximumNesting = 2; ///numero maximo de condicionales anidados permitidos antes de considerarse un code Smell
-    int maxLenghtIdentifiers = 16; ///longitud maxima de los identificadores
-    int minLenghtIdentifiers = 2; ///longitud minima de los identificadores
-    int maxNumberOperators = 5;  ///maximo numero de operadores en una expresion
-    int maxParams = 4; //maximo numero de parametros antes de ser code smell
+    public int maxMethod; ///numero maximo de instrucciones que puede tener un metodo para no ser considerado un code Smell
+    public int minMethod; ///numero minimo de instrucciones que puede tener un metodo para no ser considerado un code Smell
+    public int maxNesting; ///numero maximo de condicionales anidados permitidos antes de considerarse un code Smell
+    public int maxId; ///longitud maxima de los identificadores
+    public int minId; ///longitud minima de los identificadores
+    public int maxOps;  ///maximo numero de operadores en una expresion
+    public int maxParams; //maximo numero de parametros antes de ser code smell
 
     //nuestro objeto detector
     public CodeSmellDetector detector;
@@ -22,7 +20,15 @@ public class VisitorCPP <T> extends  CPPBaseVisitor {
     public List<Funcion> funciones = new ArrayList<Funcion>();
     int classCount = -1;
 
-    VisitorCPP() {
+    VisitorCPP(int maxMethod, int minMethod, int maxNesting, int maxId, int minId, int maxParams, int maxOps) {
+        this.maxMethod = maxMethod;
+        this.minMethod = minMethod;
+        this.maxNesting = maxNesting;
+        this.maxId = maxId;
+        this.minId = minId;
+        this.maxParams = maxParams;
+        this.maxOps = maxOps;
+
         detector = new CodeSmellDetector();
     }
 
@@ -45,7 +51,7 @@ public class VisitorCPP <T> extends  CPPBaseVisitor {
             nesting = nestingCount(ctx.statement().get(0).getText(), "switch");
         }
 
-        if (nesting > maximumNesting) {
+        if (nesting > maxNesting) {
             detector.AddCodeSmell(SMELL.CyclomaticComplexy, ctx.getStart().getLine(), ctx.getStart().getCharPositionInLine());
         }
         return (T) super.visitChildren(ctx);
@@ -62,7 +68,7 @@ public class VisitorCPP <T> extends  CPPBaseVisitor {
             nesting = nestingCount(ctx.statement().getText(), "while");
         }
 
-        if (nesting > maximumNesting) {
+        if (nesting > maxNesting) {
             detector.AddCodeSmell(SMELL.CyclomaticComplexy, ctx.getStart().getLine(), ctx.getStart().getCharPositionInLine());
         }
         return (T) super.visitChildren(ctx);
@@ -132,9 +138,9 @@ public class VisitorCPP <T> extends  CPPBaseVisitor {
     @Override
     public T visitDeclaratorid(CPPParser.DeclaratoridContext ctx) {
         String identifier = ctx.idexpression().unqualifiedid().Identifier().getText();
-        if (identifier.length() < minLenghtIdentifiers) {
+        if (identifier.length() < minId) {
             detector.AddCodeSmell(SMELL.ShortIdentifiers, ctx.getStart().getLine(), ctx.getStart().getCharPositionInLine());
-        } else if (identifier.length() > maxLenghtIdentifiers) {
+        } else if (identifier.length() > maxId) {
             detector.AddCodeSmell(SMELL.LongIdentifiers, ctx.getStart().getLine(), ctx.getStart().getCharPositionInLine());
         }
         return (T) visitChildren(ctx);
@@ -146,7 +152,7 @@ public class VisitorCPP <T> extends  CPPBaseVisitor {
         String expression = ctx.getText();
         if(!expression.contains("<<") || !expression.contains(">>")){
             String[] exprarr = expression.split("&&|<|>|==|!|\\|\\|");
-            if (exprarr.length > maxNumberOperators) {
+            if (exprarr.length > maxOps) {
                 detector.AddCodeSmell(SMELL.TooComplicatedExpression, ctx.getStart().getLine(), ctx.getStart().getCharPositionInLine());
             }
         }
