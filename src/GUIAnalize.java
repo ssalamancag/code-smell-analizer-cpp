@@ -41,7 +41,7 @@ public class GUIAnalize {
     public String addLineNumber(String file){
         String codeFormatted = "";
         String readLine = "";
-        Integer i = 0;
+        Integer i = 1;
         try (BufferedReader bufferedReader = new BufferedReader(new FileReader(file));
         ) {
             while ((readLine = bufferedReader.readLine()) != null) {

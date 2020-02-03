@@ -23,7 +23,7 @@ public class ResultGUI {
 
     public void createResultGUI(String code, String smells){
         frame2.setContentPane(new ResultGUI(code, smells).PanelResult);
-        frame2.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame2.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         frame2.pack();
         frame2.setVisible(true);
     }
